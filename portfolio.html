@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikhil Kumar Singh | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8; /* Softer background */
+            color: #1a202c; /* Dark text */
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
+        }
+        .accent-color {
+            color: #38bdf8; /* Vibrant light blue */
+        }
+        .bg-accent {
+            background-color: #38bdf8;
+        }
+        .bg-gradient-hero {
+            position: relative;
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            overflow: hidden;
+        }
+        .bg-gradient-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: move-bg 20s linear infinite;
+        }
+        @keyframes move-bg {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #38bdf8;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        /* Fade-in and slide-up animation */
+        .animate-fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Card hover animation */
+        .card-hover {
+            transition: all 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #38bdf8;
+        }
+        /* Timeline style */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background-color: #38bdf8;
+            border-radius: 50%;
+            border: 2px solid #a5f3fc;
+        }
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: -14px;
+            top: 16px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background-color: #a5f3fc;
+        }
+        .badge {
+            @apply inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800;
+            transition: all 0.3s ease-in-out;
+        }
+        .badge:hover {
+            background-color: #38bdf8;
+            color: white;
+            transform: scale(1.1);
+        }
+        /* Cursor effect */
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease-out;
+            filter: blur(8px);
+        }
+        a, button, .card-hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-slate-800 antialiased">
+
+    <!-- Cursor follower -->
+    <div id="cursor"></div>
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
+            <a href="#hero" class="text-2xl font-bold accent-color">Nikhil Kumar Singh</a>
+            <div class="hidden md:flex space-x-8 text-slate-700 font-medium">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-slate-700">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md pb-4">
+            <a href="#about" class="block py-2 px-4 text-center font-medium hover:bg-gray-100 rounded-md">About</a>
+            <a href="#skills" class="block py-2 px-4 text-center font-medium hover:bg-gray-100 rounded-md">Skills</a>
+            <a href="#projects" class="block py-2 px-4 text-center font-medium hover:bg-gray-100 rounded-md">Projects</a>
+            <a href="#education" class="block py-2 px-4 text-center font-medium hover:bg-gray-100 rounded-md">Education</a>
+            <a href="#certifications" class="block py-2 px-4 text-center font-medium hover:bg-gray-100 rounded-md">Certifications</a>
+            <a href="#contact" class="block py-2 px-4 text-center font-medium hover:bg-gray-100 rounded-md">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 max-w-7xl pt-24">
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center py-16 bg-gradient-hero rounded-3xl mt-8 shadow-xl animate-fade-up">
+            <div class="relative z-10">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-wide">
+                    <span class="accent-color">Nikhil Kumar Singh</span>
+                </h1>
+                <h2 class="text-xl sm:text-2xl lg:text-3xl mt-2 text-slate-600 font-medium">Computer Science Engineering Student</h2>
+                <p class="mt-6 text-lg max-w-2xl mx-auto text-slate-500">
+                    A resourceful and goal-oriented individual with a passion for building innovative solutions.
+                </p>
+                <div class="mt-8 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/nikhilkumarsingh3/" target="_blank" class="text-slate-600 hover:text-blue-500 transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-linkedin fa-2x"></i>
+                    </a>
+                    <a href="https://github.com/nikhilkumarsingh" target="_blank" class="text-slate-600 hover:text-blue-500 transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                    <a href="https://www.instagram.com/_nikhil._.maurya_?igsh=MWJja253eHRxYWVxYQ==" target="_blank" class="text-slate-600 hover:text-blue-500 transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
+                    <a href="mailto:nikhil80029@gmail.com" class="text-slate-600 hover:text-blue-500 transition-colors duration-300 transform hover:scale-110">
+                        <i class="fas fa-envelope fa-2x"></i>
+                    </a>
+                </div>
+                <a href="#" class="inline-block mt-8 px-6 py-3 bg-accent text-white font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" onclick="window.open('https://firebasestorage.googleapis.com/v0/b/chatbot-prod-43405.appspot.com/o/22BCS13067%20Resume%20Updated_compressed%20new%20update%20-%20Copy.pdf?alt=media&token=48028f09-d2d1-412d-a417-268e64c2049d', '_blank'); return false;">
+                    Download Resume
+                </a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20 animate-fade-up">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">About Me</h2>
+            <div class="bg-white p-8 sm:p-12 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    I am a dedicated Computer Science Engineering student with a passion for building innovative solutions and tackling real-world problems. With a strong foundation in **C++, Core Java, and Python**, I specialize in applying my skills to fields like machine learning and data analysis. I'm a hands-on learner, driven to contribute to impactful projects and continuously expand my technical expertise. My goal is to leverage my problem-solving abilities and leadership skills to create great software and grow as a professional.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 animate-fade-up">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Technical Skills & Soft Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Technical Skills -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2 accent-color"><i class="fas fa-code"></i> Technical Skills</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg mb-2">Programming Languages</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">C++</span>
+                                <span class="badge">Core Java</span>
+                                <span class="badge">Python</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-2">Web Development</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">HTML</span>
+                                <span class="badge">CSS</span>
+                                <span class="badge">JavaScript</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-2">Database</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">Basic SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2 accent-color"><i class="fas fa-handshake"></i> Soft Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">Team Leadership</span>
+                        <span class="badge">Communication</span>
+                        <span class="badge">Problem-Solving</span>
+                        <span class="badge">Time Management</span>
+                        <span class="badge">Active Listening</span>
+                        <span class="badge">Decision Making</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 animate-fade-up">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                    <h3 class="text-xl font-bold accent-color mb-2">Atrial Fibrillation Prediction</h3>
+                    <p class="text-slate-600 mb-4">Developed a predictive model for atrial fibrillation using Python-based AI techniques, utilizing machine learning libraries like scikit-learn and Pandas for data preprocessing and model training.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">Python</span>
+                        <span class="badge">ML</span>
+                        <span class="badge">scikit-learn</span>
+                        <span class="badge">Pandas</span>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                    <h3 class="text-xl font-bold accent-color mb-2">Bank Management System</h3>
+                    <p class="text-slate-600 mb-4">Built a console-based application in C++ to manage banking operations, including features like account creation, deposit/withdrawal, and balance enquiry.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">C++</span>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                    <h3 class="text-xl font-bold accent-color mb-2">Car Dataset Analysis</h3>
+                    <p class="text-slate-600 mb-4">Performed data analysis on a car dataset to derive meaningful insights using Python libraries, including NumPy, Pandas, and Matplotlib for analysis and visualization.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">Python</span>
+                        <span class="badge">Pandas</span>
+                        <span class="badge">Matplotlib</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 animate-fade-up">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Education</h2>
+            <div class="relative max-w-3xl mx-auto">
+                <!-- Timeline Container -->
+                <div class="space-y-12">
+                    <!-- Timeline Item 1 -->
+                    <div class="relative timeline-item pl-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                            <h3 class="text-xl font-semibold accent-color">B.Tech in Computer Science Engineering</h3>
+                            <p class="text-slate-600 font-medium mt-1">Chandigarh University, Gharuan</p>
+                            <p class="text-sm text-slate-500 mt-1">2022-2025 | CGPA: 6.4</p>
+                        </div>
+                    </div>
+                    <!-- Timeline Item 2 -->
+                    <div class="relative timeline-item pl-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                            <h3 class="text-xl font-semibold accent-color">Intermediate (CBSE)</h3>
+                            <p class="text-slate-600 font-medium mt-1">Gurukul Vidyapeeth, Bihar</p>
+                            <p class="text-sm text-slate-500 mt-1">2020-2022 | Percentage: 67%</p>
+                        </div>
+                    </div>
+                    <!-- Timeline Item 3 -->
+                    <div class="relative timeline-item pl-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 card-hover">
+                            <h3 class="text-xl font-semibold accent-color">Matriculation (CBSE)</h3>
+                            <p class="text-slate-600 font-medium mt-1">B.S. Public School, Bihar</p>
+                            <p class="text-sm text-slate-500 mt-1">2019-2020 | Percentage: 62.5%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20 animate-fade-up">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Certifications</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <!-- Certification Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 text-center card-hover">
+                    <i class="fas fa-robot text-4xl accent-color mb-4"></i>
+                    <h3 class="text-lg font-bold">AI with Python</h3>
+                    <p class="text-sm text-slate-600">Certificate of AI with Python</p>
+                </div>
+                <!-- Certification Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 text-center card-hover">
+                    <i class="fas fa-cloud text-4xl accent-color mb-4"></i>
+                    <h3 class="text-lg font-bold">Cloud Computing - NPTEL</h3>
+                    <p class="text-sm text-slate-600">NPTEL Certification for Cloud Computing - IIT Kharagpur</p>
+                </div>
+                <!-- Certification Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 text-center card-hover">
+                    <i class="fas fa-cubes text-4xl accent-color mb-4"></i>
+                    <h3 class="text-lg font-bold">Blockchain DApps</h3>
+                    <p class="text-sm text-slate-600">Certificate of Build DApps in Ethereum Blockchain</p>
+                </div>
+                <!-- Certification Card 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 text-center card-hover">
+                    <i class="fas fa-laptop-code text-4xl accent-color mb-4"></i>
+                    <h3 class="text-lg font-bold">OOP in C++ DBMS</h3>
+                    <p class="text-sm text-slate-600">Object Oriented Programming in C++ DBMS by Meta (Coursera)</p>
+                </div>
+                <!-- Certification Card 5 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 text-center card-hover">
+                    <i class="fas fa-microchip text-4xl accent-color mb-4"></i>
+                    <h3 class="text-lg font-bold">Multi-Core Computer Architecture</h3>
+                    <p class="text-sm text-slate-600">NPTEL Certification - IIT Guwahati</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 animate-fade-up">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Get in Touch</h2>
+            <div class="bg-white p-8 sm:p-12 rounded-2xl shadow-lg border border-gray-200 flex flex-col md:flex-row gap-8 card-hover">
+                <div class="flex-1 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-envelope text-2xl accent-color"></i>
+                        <div>
+                            <h3 class="font-semibold text-lg">Email</h3>
+                            <a href="mailto:nikhil80029@gmail.com" class="text-slate-600 hover:text-blue-500 transition-colors">nikhil80029@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-phone-alt text-2xl accent-color"></i>
+                        <div>
+                            <h3 class="font-semibold text-lg">Phone</h3>
+                            <a href="tel:+916207966599" class="text-slate-600 hover:text-blue-500 transition-colors">+91 6207966599</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fab fa-linkedin text-2xl accent-color"></i>
+                        <div>
+                            <h3 class="font-semibold text-lg">LinkedIn</h3>
+                            <a href="https://www.linkedin.com/in/nikhilkumarsingh3/" target="_blank" class="text-slate-600 hover:text-blue-500 transition-colors">nikhilkumarsingh3</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <form class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700">Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-700">Message</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-accent text-white font-medium rounded-md shadow-lg hover:bg-blue-600 transition-colors duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-8 mt-16 border-t border-gray-200">
+        <div class="container mx-auto px-4 max-w-7xl text-center">
+            <p class="text-slate-600 text-sm">&copy; 2024 Nikhil Kumar Singh. All rights reserved.</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="https://www.linkedin.com/in/nikhilkumarsingh3/" target="_blank" class="text-gray-600 hover:text-blue-500 transition-colors">
+                    <i class="fab fa-linkedin fa-lg"></i>
+                </a>
+                <a href="https://github.com/nikhilkumarsingh" target="_blank" class="text-gray-600 hover:text-blue-500 transition-colors">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+                <a href="https://www.instagram.com/_nikhil._.maurya_?igsh=MWJja253eHRxYWVxYQ==" target="_blank" class="text-gray-600 hover:text-blue-500 transition-colors">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+                <a href="mailto:nikhil80029@gmail.com" class="text-gray-600 hover:text-blue-500 transition-colors">
+                    <i class="fas fa-envelope fa-lg"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hide mobile menu after clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Intersection Observer for fade-in animation
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-fade-up').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Cursor effect JavaScript
+        const cursor = document.getElementById('cursor');
+
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+    </script>
+</body>
+</html>
